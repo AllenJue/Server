@@ -11,9 +11,12 @@ public class Server {
         // create a connection socket
         Socket connFd = serverSocket.accept();
         Scanner server_input = new Scanner(connFd.getInputStream());
-        int number = server_input.nextInt();
-        int temp = number * 2;
         PrintStream server_output = new PrintStream(connFd.getOutputStream());
-        server_output.println(temp);
+        while(true) {
+            int number = server_input.nextInt();
+            int temp = number * 2;
+            server_output.println(temp);
+        }
+
     }
 }
