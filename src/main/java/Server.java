@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Server {
     public static void main(String[] args) throws IOException {
         // listening socket
-        ServerSocket serverSocket = new ServerSocket(1000);
+        ServerSocket serverSocket = new ServerSocket(3000);
         // create a connection socket
         Socket connFd = serverSocket.accept();
         Scanner server_input = new Scanner(connFd.getInputStream());

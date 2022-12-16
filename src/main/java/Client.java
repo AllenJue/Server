@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
-        // create socket on local with some random port number
-        Socket client_socket = new Socket("127.0.0.1", 1000);
+        // create socket on freud.cs.utexas.edu with some random port number
+        Socket client_socket = new Socket("128.83.120.232", 3000);
         // gets input from server
         Scanner client_input = new Scanner(client_socket.getInputStream());
         PrintStream client_output = new PrintStream(client_socket.getOutputStream());
