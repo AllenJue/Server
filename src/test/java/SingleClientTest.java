@@ -14,9 +14,9 @@ public class SingleClientTest {
             String resp1 = client.sendMessage("Hello");
             String resp2 = client.sendMessage("World");
             String terminate = client.sendMessage("quit");
-            Assertions.assertEquals(resp1, "Message received: Hello");
-            Assertions.assertEquals(resp2, "Message received: World");
-            Assertions.assertEquals(terminate, "Exiting");
+            Assertions.assertEquals("Message received: Hello", resp1);
+            Assertions.assertEquals("Message received: World", resp2);
+            Assertions.assertEquals("Exiting", terminate);
         } catch (Exception e) {
             System.out.println("Network failed");
         }
@@ -29,13 +29,13 @@ public class SingleClientTest {
             client.startConnection(FREUD, TEST_PORT);
             String resp1 = client.sendMessage("Connecting");
             String terminate = client.sendMessage("quit");
-            Assertions.assertEquals(resp1, "Message received: Connecting");
-            Assertions.assertEquals(terminate, "Exiting");
+            Assertions.assertEquals("Message received: Connecting", resp1);
+            Assertions.assertEquals("Exiting", terminate);
             client.startConnection(FREUD, TEST_PORT);
             String resp2 = client.sendMessage("Reconnecting");
             String terminate2 = client.sendMessage("quit");
-            Assertions.assertEquals(resp2, "Message received: Reconnecting");
-            Assertions.assertEquals(terminate, "Exiting");
+            Assertions.assertEquals("Message received: Reconnecting", resp2);
+            Assertions.assertEquals("Exiting", terminate2);
         } catch (Exception e) {
             System.out.println("Network failed");
         }
