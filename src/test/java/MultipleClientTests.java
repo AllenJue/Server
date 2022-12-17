@@ -1,10 +1,21 @@
+/**
+ * Author: Allen Jue
+ * Date: 12/17/2022
+ */
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests the accuracy of the client-server relationship between multiple clients
+ */
 public class MultipleClientTests {
     private static final String FREUD = "128.83.120.232";
     private static final int TEST_PORT = 3000;
 
+    /**
+     * Test if multiple clients at once can work commands for each are sequentially adjacent
+     */
     @Test
     public void test_open_multiple_clients() {
         Client client1 = new Client();
@@ -25,6 +36,9 @@ public class MultipleClientTests {
         }
     }
 
+    /**
+     * Tests if multiple open clients can work with a server if their commands are interleaved
+     */
     @Test
     public void test_interleave_multiple_clients() {
         Client client1 = new Client();
