@@ -17,8 +17,9 @@ public class MultipleClientTests {
             Assertions.assertEquals(resp1, "Message received: Hello");
             Assertions.assertEquals(terminate, "Exiting");
             String resp2 = client1.sendMessage("Hello from thread 2");
-            String terminate = client2.sendMessage("quit");
+            String terminate2 = client2.sendMessage("quit");
             Assertions.assertEquals(resp2, "Message received");
+            Assertions.assertEquals(resp2, "Exiting");
         } catch (Exception e) {
             System.out.println("Network failed");
         }

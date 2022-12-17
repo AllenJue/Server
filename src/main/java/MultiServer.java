@@ -37,7 +37,7 @@ public class MultiServer {
                         serverOutput.println("Exiting");
                         break;
                     }
-                    serverOutput.println("Message Received: " + input);
+                    serverOutput.println("Message received: " + input);
                 }
 
                 serverInput.close();
