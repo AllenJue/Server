@@ -30,20 +30,4 @@ public class Client {
         clientOutput.close();
         clientSocket.close();
     }
-
-//    public static void main(String[] args) throws IOException {
-//        Scanner input = new Scanner(System.in);
-//        // create socket on freud.cs.utexas.edu with some random port number
-//        client_socket = new Socket("128.83.120.232", 3000);
-//        // gets input from server
-//        Scanner client_input = new Scanner(client_socket.getInputStream());
-//        PrintStream client_output = new PrintStream(client_socket.getOutputStream());
-//        while(true) {
-//            System.out.println("Enter an integer: ");
-//            int number = input.nextInt();
-//            // prints output to server
-//            client_output.println(number);
-//            System.out.println("Server result: " + client_input.nextInt());
-//        }
-//    }
 }
