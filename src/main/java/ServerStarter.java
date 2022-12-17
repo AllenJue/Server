@@ -1,6 +1,14 @@
+/**
+ * Author: Allen Jue
+ * Date: 12/17/2022
+ */
+
 import java.io.IOException;
 import java.net.ServerSocket;
 
+/**
+ * Starting point for a server. Creates a server with a port of 3000.
+ */
 public class ServerStarter {
     private static final int DEFAULT_PORT = 3000;
 
