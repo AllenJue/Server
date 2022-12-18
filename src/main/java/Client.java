@@ -40,8 +40,7 @@ public class Client {
     public String sendMessage(String message) {
         clientOutput.println(message);
         try {
-            String resp = clientInput.readLine();
-            return resp;
+            return clientInput.readLine();
         } catch (Exception e) {
             System.out.println("Network error: Could not read input");
             return null;

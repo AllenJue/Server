@@ -60,9 +60,7 @@ public class MultiServer {
         public void run() {
             String input;
             try {
-                serverOutput.println("Enter Username");
                 String username = serverInput.readLine();
-                serverOutput.println("Enter Password");
                 String password = serverInput.readLine();
                 // temporarily testing to see if I can get inputs thusly
                 System.out.println("Your username and password are: " + username + " " + password);
