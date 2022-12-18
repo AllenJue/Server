@@ -40,11 +40,37 @@ public class Client {
     public String sendMessage(String message) {
         clientOutput.println(message);
         try {
-            return clientInput.readLine();
+            String resp = clientInput.readLine();
+            if(resp.equals("Exiting")) {
+                stopConnection();
+            }
+            return resp;
+
         } catch (Exception e) {
             System.out.println("Network error: Could not read input");
             return null;
         }
+    }
+
+
+    public boolean authenticate(String credentials) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter username: ");
+        String username = sc.nextLine();
+        System.out.println("Enter password: ");
+        String password = sc.nextLine();
+        if(username.length() > 100 || password.length() > 100) {
+            System.out.println("Stack smashing bad!");
+            return false;
+        }
+        String credentialResp = this.sendMessage(username + " " + password);
+        boolean success = credentialResp.equals("Exiting");
+        if(!success) {
+            stopConnection();
+        }
+        sc.close();
+        System.out.println(credentialResp);
+        return success;
     }
 
     /**

@@ -65,8 +65,8 @@ public class MultiServer {
                 String username = inputCreds[0];
                 String password = inputCreds[1];
                 // temporarily testing to see if I can get inputs thusly
-                System.out.println("Your username and password are: " + username + " " + password);
-                // do some authentification with DB
+                serverOutput.println("Your username and password are: " + username + " " + password);
+                // do some authentication with DB
                 // valid = authenticate(username, password)
                 // TODO replace
                 valid = true;

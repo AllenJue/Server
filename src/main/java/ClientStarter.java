@@ -7,20 +7,17 @@ public class ClientStarter {
     public static void main(String[] args) {
         Client client = new Client();
         client.startConnection(FREUD, TEST_PORT);
+        String username = "allen";
+        String password = "jue";
+        client.authenticate(username + " " + password);
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter username: ");
-        String username = sc.nextLine();
-        System.out.println("Enter password: ");
-        String password = sc.nextLine();
-        if(username.length() > 100 || password.length() > 100) {
-            System.out.println("Stack smashing bad!");
-            return;
-        }
-        String credentialResp = client.sendMessage(username + " " + password);
-        System.out.println(credentialResp);
         while(true) {
             String resp = client.sendMessage(sc.nextLine());
+            if(resp.equals("Exiting")) {
+                break;
+            }
             System.out.println(resp);
         }
+        sc.close();
     }
 }
