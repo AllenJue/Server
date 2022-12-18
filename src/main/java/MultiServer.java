@@ -6,6 +6,7 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.prefs.Preferences;
 
 /**
  * A server that can handle multiple client connections
@@ -13,6 +14,7 @@ import java.net.Socket;
 public class MultiServer {
     private ServerSocket serverSocket; /* The listening socket for a server */
     public void start(int port) throws IOException {
+        Preferences preferences = Preferences.userNodeForPackage(MultiServer.class);
         /* listening socket */
         serverSocket = new ServerSocket(port);
         /* continue to listen for new connections to accept */
@@ -58,6 +60,12 @@ public class MultiServer {
         public void run() {
             String input;
             try {
+                serverOutput.println("Enter Username");
+                String username = serverInput.readLine();
+                serverOutput.println("Enter Password");
+                String password = serverInput.readLine();
+                // temporarily testing to see if I can get inputs thusly
+                System.out.println("Your username and password are: " + username + " " + password);
                 while((input = serverInput.readLine()) != null) {
                     if(input.equals("quit")) {
                         serverOutput.println("Exiting");
