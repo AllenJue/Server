@@ -62,10 +62,12 @@ public class MultiServer {
             try {
                 boolean valid = false;
                 String[] inputCreds = serverInput.readLine().split("\\s+");
-                String username = inputCreds[0];
-                String password = inputCreds[1];
-                // temporarily testing to see if I can get inputs thusly
-                serverOutput.println("Your username and password are: " + username + " " + password);
+                if(inputCreds.length == 2) {
+                    String username = inputCreds[0];
+                    String password = inputCreds[1];
+                    // temporarily testing to see if I can get inputs thusly
+                    serverOutput.println("Your username and password are: " + username + " " + password);
+                }
                 // do some authentication with DB
                 // valid = authenticate(username, password)
                 // TODO replace

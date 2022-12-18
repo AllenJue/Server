@@ -53,22 +53,26 @@ public class Client {
     }
 
 
-    public boolean authenticate(String credentials) {
+    public String getCredInput() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter username: ");
         String username = sc.nextLine();
         System.out.println("Enter password: ");
         String password = sc.nextLine();
-        if(username.length() > 100 || password.length() > 100) {
-            System.out.println("Stack smashing bad!");
+        return username + " " + password;
+    }
+
+    public boolean authenticate(String credentials) {
+        /* TODO check for stack smashing */
+        String[] userAndPass = credentials.split("\\s+");
+        if(userAndPass.length != 2) {
             return false;
         }
-        String credentialResp = this.sendMessage(username + " " + password);
-        boolean success = credentialResp.equals("Exiting");
+        String credentialResp = this.sendMessage(userAndPass[0] + " " + userAndPass[1]);
+        boolean success = !credentialResp.equals("Exiting");
         if(!success) {
             stopConnection();
         }
-        sc.close();
         System.out.println(credentialResp);
         return success;
     }
