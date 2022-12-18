@@ -16,9 +16,8 @@ public class ClientStarter {
             System.out.println("Stack smashing bad!");
             return;
         }
-        String userResp = client.sendMessage(username);
-        String passResp = client.sendMessage(password);
-        System.out.println(userResp + " " + passResp);
+        String credentialResp = client.sendMessage(username + " " + password);
+        System.out.println(credentialResp);
         while(true) {
             String resp = client.sendMessage(sc.nextLine());
             System.out.println(resp);
