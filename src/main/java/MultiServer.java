@@ -60,11 +60,17 @@ public class MultiServer {
         public void run() {
             String input;
             try {
-                String username = serverInput.readLine();
-                String password = serverInput.readLine();
+                boolean valid = false;
+                String[] inputCreds = serverInput.readLine().split("\\s+");
+                String username = inputCreds[0];
+                String password = inputCreds[1];
                 // temporarily testing to see if I can get inputs thusly
                 System.out.println("Your username and password are: " + username + " " + password);
-                while((input = serverInput.readLine()) != null) {
+                // do some authentification with DB
+                // valid = authenticate(username, password)
+                // TODO replace
+                valid = true;
+                while(valid && (input = serverInput.readLine()) != null) {
                     if(input.equals("quit")) {
                         serverOutput.println("Exiting");
                         break;

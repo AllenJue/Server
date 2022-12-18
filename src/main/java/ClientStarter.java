@@ -12,10 +12,16 @@ public class ClientStarter {
         String username = sc.nextLine();
         System.out.println("Enter password: ");
         String password = sc.nextLine();
-        client.sendMessage("username");
-        client.sendMessage("password");
+        if(username.length() > 100 || password.length() > 100) {
+            System.out.println("Stack smashing bad!");
+            return;
+        }
+        String userResp = client.sendMessage(username);
+        String passResp = client.sendMessage(password);
+        System.out.println(userResp + " " + passResp);
         while(true) {
-
+            String resp = client.sendMessage(sc.nextLine());
+            System.out.println(resp);
         }
     }
 }
