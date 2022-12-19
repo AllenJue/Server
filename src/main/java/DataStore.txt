@@ -1,1 +1,1 @@
-allen 123 pasword
+allen 123 password

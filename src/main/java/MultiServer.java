@@ -39,6 +39,8 @@ public class MultiServer {
             }
             info.put(data[0], new UserInfo(data[0], data[1], data[2]));
         }
+        System.out.println("Server loadded with: ");
+        System.out.println(info);
     }
 
     /**
@@ -58,6 +60,11 @@ public class MultiServer {
             this.username = username;
             this.salt = salt;
             this.hashed = password;
+        }
+
+        @Override
+        public String toString() {
+            return username + " " + salt + " " + hashed;
         }
     }
     /**
@@ -91,17 +98,18 @@ public class MultiServer {
                 boolean valid = false;
                 String[] inputCreds = serverInput.readLine().split("\\s+");
                 if(instructionNotEmpty(inputCreds.length)) {
-                    switch (inputCreds[0]) {
-                        case "Create":
-                            createAccount(inputCreds);
-                            break;
-                        case "Login":
-                            login(inputCreds);
-                            break;
-                        default:
-                            System.out.println("Invalid input");
-                            break;
-                    }
+                    // switch (inputCreds[0]) {
+                    //     case "Create":
+                    //         createAccount(inputCreds);
+                    //         break;
+                    //     case "Login":
+                    //         login(inputCreds);
+                    //         break;
+                    //     default:
+                    //         System.out.println("Invalid input");
+                    //         break;
+                    // }
+                    serverOutput.println("Got your message");
 
                 }
                 // do some authentication with DB
