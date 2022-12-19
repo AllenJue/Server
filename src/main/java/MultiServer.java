@@ -70,6 +70,7 @@ public class MultiServer {
                             createAccount(inputCreds);
                             break;
                         case "Login":
+                            login(inputCreds);
                             break;
                         default:
                             System.out.println("Invalid input");
@@ -101,14 +102,18 @@ public class MultiServer {
             return numInstructions > 1;
         }
 
-        public boolean
+        public boolean login(String[] inputCreds) {
+            boolean success = false;
+            return success;
+        }
         public boolean createAccount(String[] inputCreds) {
+            boolean success = false;
             if(inputCreds.length != 3) {
-                return false;
+                return success;
             }
             String username = inputCreds[1];
             String password = inputCreds[2];
-
+            return success;
         }
     }
 }
