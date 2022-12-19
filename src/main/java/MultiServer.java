@@ -6,23 +6,38 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.prefs.Preferences;
 
 /**
  * A server that can handle multiple client connections
  */
 public class MultiServer {
-
-    private ServerSocket serverSocket; /* The listening socket for a server */
-    private Preferences preferences;
+    public final int SIZE_OF_INFO = 3;
+    Map<String, UserInfo> info = new HashMap<>(); /* Simulates database */
+    private ServerSocket serverSocket;           /* The listening socket for a server */
     public void start(int port) throws IOException {
-        preferences = Preferences.userNodeForPackage(MultiServer.class);
+        loadInfo();
         /* listening socket */
         serverSocket = new ServerSocket(port);
         /* continue to listen for new connections to accept */
         while(true) {
             /* Note: thread.start() differs from thread.run(), as start() creates a thread and then runs */
             new ServerConnection(serverSocket.accept()).start();
+        }
+    }
+
+    private void loadInfo() throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader("DataStore.txt"));
+        String input;
+        while((input = bufferedReader.readLine()) != null) {
+            String[] data = input.split("\\s+");
+            if(data.length != SIZE_OF_INFO) {
+                throw new InvalidObjectException("Login credentials invalid");
+            }
+            info.put(data[0], new UserInfo(data[0], data[1], data[2]));
         }
     }
 
@@ -34,6 +49,17 @@ public class MultiServer {
         serverSocket.close();
     }
 
+    private class UserInfo {
+        String username;
+        String salt;
+        String hashed;
+
+        public UserInfo(String username, String salt, String password) {
+            this.username = username;
+            this.salt = salt;
+            this.hashed = password;
+        }
+    }
     /**
      * An abstraction of a server connection created by a server thread. A connection is given a thread,
      * and returns the connection socket created when the listening socket accepts. The server thread
