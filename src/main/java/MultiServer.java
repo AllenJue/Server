@@ -12,9 +12,11 @@ import java.util.prefs.Preferences;
  * A server that can handle multiple client connections
  */
 public class MultiServer {
+
     private ServerSocket serverSocket; /* The listening socket for a server */
+    private Preferences preferences;
     public void start(int port) throws IOException {
-        Preferences preferences = Preferences.userNodeForPackage(MultiServer.class);
+        preferences = Preferences.userNodeForPackage(MultiServer.class);
         /* listening socket */
         serverSocket = new ServerSocket(port);
         /* continue to listen for new connections to accept */
@@ -54,7 +56,7 @@ public class MultiServer {
         }
 
         /**
-         * Overrides thread method, which is called when a thread begins it's thread of execution.
+         * Overrides thread method, which is called when a thread begins its thread of execution.
          * Listens for input constantly, blocking while waiting for I/O to come in.
          */
         public void run() {
@@ -62,11 +64,18 @@ public class MultiServer {
             try {
                 boolean valid = false;
                 String[] inputCreds = serverInput.readLine().split("\\s+");
-                if(inputCreds.length == 2) {
-                    String username = inputCreds[0];
-                    String password = inputCreds[1];
-                    // temporarily testing to see if I can get inputs thusly
-                    serverOutput.println("Your username and password are: " + username + " " + password);
+                if(instructionNotEmpty(inputCreds.length)) {
+                    switch (inputCreds[0]) {
+                        case "Create":
+                            createAccount(inputCreds);
+                            break;
+                        case "Login":
+                            break;
+                        default:
+                            System.out.println("Invalid input");
+                            break;
+                    }
+
                 }
                 // do some authentication with DB
                 // valid = authenticate(username, password)
@@ -86,6 +95,20 @@ public class MultiServer {
             } catch (Exception e) {
                 System.out.println("Server error. Oopsies");
             }
+        }
+
+        public boolean instructionNotEmpty(int numInstructions) {
+            return numInstructions > 1;
+        }
+
+        public boolean
+        public boolean createAccount(String[] inputCreds) {
+            if(inputCreds.length != 3) {
+                return false;
+            }
+            String username = inputCreds[1];
+            String password = inputCreds[2];
+
         }
     }
 }

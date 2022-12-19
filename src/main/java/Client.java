@@ -62,19 +62,23 @@ public class Client {
         return username + " " + password;
     }
 
-    public boolean authenticate(String credentials) {
+    public boolean login(String credentials) {
         /* TODO check for stack smashing */
         String[] userAndPass = credentials.split("\\s+");
         if(userAndPass.length != 2) {
             return false;
         }
-        String credentialResp = this.sendMessage(userAndPass[0] + " " + userAndPass[1]);
+        String credentialResp = this.login(userAndPass[0] + " " + userAndPass[1]);
         boolean success = !credentialResp.equals("Exiting");
         if(!success) {
             stopConnection();
         }
         System.out.println(credentialResp);
         return success;
+    }
+
+    public boolean createAccount(String credentials) {
+
     }
 
     /**

@@ -8,7 +8,7 @@ public class ClientStarter {
         Client client = new Client();
         client.startConnection(FREUD, TEST_PORT);
         String credentials = client.getCredInput();
-        client.authenticate(credentials);
+        client.login(credentials);
         Scanner sc = new Scanner(System.in);
         while(true) {
             String resp = client.sendMessage(sc.nextLine());
