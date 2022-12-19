@@ -8,8 +8,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
-import java.util.prefs.Preferences;
 
 /**
  * A server that can handle multiple client connections
@@ -39,7 +37,7 @@ public class MultiServer {
             }
             info.put(data[0], new UserInfo(data[0], data[1], data[2]));
         }
-        System.out.println("Server loadded with: ");
+        System.out.println("Server loaded with: ");
         System.out.println(info);
     }
 

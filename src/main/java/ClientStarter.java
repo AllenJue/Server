@@ -8,7 +8,7 @@ public class ClientStarter {
 
     public static void main(String[] args) {
         Client client = new Client();
-        client.startConnection(SUGAR_BOMBS, TEST_PORT);
+        client.startConnection(FREUD, TEST_PORT);
         String credentials = client.getCredInput();
         boolean authenticated = client.authenticate(credentials, false);
         Scanner sc = new Scanner(System.in);

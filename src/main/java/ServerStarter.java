@@ -18,6 +18,7 @@ public class ServerStarter {
             server.start(DEFAULT_PORT);
         } catch (Exception e) {
             System.out.println("Failed to start server");
+            System.out.println(e);
         }
     }
 }

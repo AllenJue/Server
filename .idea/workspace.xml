@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c7c2922-9838-47f1-a77b-ce72dfaddf0a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ClientStarter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClientStarter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataStore.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataStore.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MultiServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MultiServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ServerStarter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ServerStarter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +51,13 @@
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.ClientStarter">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java" />
+      <recent name="$PROJECT_DIR$/src/main" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ServerStarter">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Client" />
       <module name="Server.main" />
@@ -77,6 +82,7 @@
     <configuration name="ServerStarter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ServerStarter" />
       <module name="Server.main" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/main/java" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -102,6 +108,13 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Client" />
+      <item itemvalue="Application.ClientStarter" />
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Application.ServerStarter" />
+      <item itemvalue="Gradle.Tests in 'Server.test'" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.Tests in 'Server.test'" />
