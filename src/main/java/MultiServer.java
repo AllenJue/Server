@@ -146,6 +146,7 @@ public class MultiServer {
                 return success;
             }
             String salt = getNewSalt();
+            System.out.println(salt);
             String username = inputCreds[1];
             String password = inputCreds[2];
             return success;

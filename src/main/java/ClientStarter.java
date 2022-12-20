@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ClientStarter {
@@ -6,7 +7,7 @@ public class ClientStarter {
     private static final String LOCAL = "127.0.0.1";
     private static final int TEST_PORT = 3000;              /* Arbitrary port used */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Client client = new Client();
         client.startConnection(FREUD, TEST_PORT);
         String credentials = client.getCredInput();
