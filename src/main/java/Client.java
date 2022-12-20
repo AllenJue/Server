@@ -20,14 +20,10 @@ public class Client {
      * @param ip_addr target IP address for a client connection
      * @param port number to identify a process
      */
-    public void startConnection(String ip_addr, int port)  {
-        try {
-            clientSocket = new Socket(ip_addr, port);
-            clientOutput = new PrintWriter(clientSocket.getOutputStream(), true);
-            clientInput = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        } catch (Exception e) {
-            System.out.println("Network error");
-        }
+    public void startConnection(String ip_addr, int port) throws IOException {
+        clientSocket = new Socket(ip_addr, port);
+        clientOutput = new PrintWriter(clientSocket.getOutputStream(), true);
+        clientInput = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     }
 
     /**
@@ -37,19 +33,13 @@ public class Client {
      *         "Exiting" if the message was 'quit'
      *         null if there was a network failure
      */
-    public String sendMessage(String message) {
+    public String sendMessage(String message) throws IOException {
         clientOutput.println(message);
-        try {
-            String resp = clientInput.readLine();
-            if(resp.equals("Exiting")) {
-                stopConnection();
-            }
-            return resp;
-
-        } catch (Exception e) {
-            System.out.println("Network error: Could not read input");
-            return null;
+        String resp = clientInput.readLine();
+        if(resp.equals("Exiting")) {
+            stopConnection();
         }
+        return resp;
     }
 
 
@@ -62,7 +52,7 @@ public class Client {
         return username + " " + password;
     }
 
-    public boolean authenticate(String credentials, boolean create) {
+    public boolean authenticate(String credentials, boolean create) throws IOException {
         /* TODO check for stack smashing */
         String credentialResp = create ? this.sendMessage("Create " + credentials) :
                 this.sendMessage("Login " + credentials);
@@ -78,14 +68,9 @@ public class Client {
     /**
      * Closes a client connection.
      */
-    public void stopConnection() {
-        try {
-            clientInput.close();
-            clientOutput.close();
-            clientSocket.close();
-        } catch (Exception e) {
-            System.out.println("Failed to close connection");
-        }
-
+    public void stopConnection() throws IOException {
+        clientInput.close();
+        clientOutput.close();
+        clientSocket.close();
     }
 }
