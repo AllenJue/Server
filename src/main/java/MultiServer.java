@@ -3,11 +3,14 @@
  * Date: 12/17/2022
  */
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -74,6 +77,8 @@ public class MultiServer {
      * only has a single purpose, give the client confirmation that a message was received and exit.
      */
     private class ServerConnection extends Thread {
+        private final int DERIVED_KEY_LENGTH = 512;
+
         private BufferedReader serverInput; /* Synchronous read for incoming data */
         private PrintWriter serverOutput;   /* Synchronous write for outgoing data */
         private Socket connFd;              /* Connection socket for communicating with client */
@@ -94,6 +99,7 @@ public class MultiServer {
          * Listens for input constantly, blocking while waiting for I/O to come in.
          */
         public void run() {
+
             String input;
             try {
                 boolean valid = false;
@@ -140,16 +146,36 @@ public class MultiServer {
             return success;
         }
 
-        public boolean createAccount(String[] inputCreds) throws NoSuchAlgorithmException {
+        public boolean createAccount(String[] inputCreds)
+                throws NoSuchAlgorithmException, InvalidKeySpecException {
             boolean success = false;
             if(inputCreds.length != 3) {
                 return success;
             }
             String salt = getNewSalt();
-            System.out.println(salt);
             String username = inputCreds[1];
             String password = inputCreds[2];
+            String encryptedPassword = getEncryptedPassword(salt, password);
+            System.out.println(encryptedPassword);
             return success;
+        }
+
+
+        private String getEncryptedPassword(String salt, String password)
+                throws InvalidKeySpecException, NoSuchAlgorithmException {
+            /* Specify the algorithm for encryption. PBKDF2--WithHmac--SHA512
+                PBKDF2 handles Password-based-key-derivative function - creates a cipher function
+                WithHmac - Keyed-Hash Message Authentication Code - creates a message authentication code
+                SHA512 - hash function
+             */
+            String algorithm = "PBKDF2WithHmacSHA1";
+            final int iterations = 20000;
+            byte[] saltBytes = Base64.getDecoder().decode(salt);
+            System.out.println(saltBytes.toString());
+            PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), saltBytes, iterations, DERIVED_KEY_LENGTH);
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(algorithm);
+            byte[] encodedBytes = keyFactory.generateSecret(spec).getEncoded();
+            return Base64.getEncoder().encodeToString(encodedBytes);
         }
 
         /**
