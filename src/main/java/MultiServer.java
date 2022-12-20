@@ -6,6 +6,9 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,19 +99,17 @@ public class MultiServer {
                 boolean valid = false;
                 String[] inputCreds = serverInput.readLine().split("\\s+");
                 if(instructionNotEmpty(inputCreds.length)) {
-                    // switch (inputCreds[0]) {
-                    //     case "Create":
-                    //         createAccount(inputCreds);
-                    //         break;
+                     switch (inputCreds[0]) {
+                         case "Create":
+                             createAccount(inputCreds);
+                             break;
                     //     case "Login":
                     //         login(inputCreds);
                     //         break;
                     //     default:
                     //         System.out.println("Invalid input");
                     //         break;
-                    // }
-                    serverOutput.println("Got your message");
-
+                     }
                 }
                 // do some authentication with DB
                 // valid = authenticate(username, password)
@@ -138,14 +139,28 @@ public class MultiServer {
             boolean success = false;
             return success;
         }
-        public boolean createAccount(String[] inputCreds) {
+
+        public boolean createAccount(String[] inputCreds) throws NoSuchAlgorithmException {
             boolean success = false;
             if(inputCreds.length != 3) {
                 return success;
             }
+            String salt = getNewSalt();
             String username = inputCreds[1];
             String password = inputCreds[2];
             return success;
+        }
+
+        /**
+         * Gets base64 encoded salt.
+         * @return
+         */
+        private String getNewSalt() throws NoSuchAlgorithmException {
+            /* Use SecureRandom to get crpytographically strong random numbers */
+            SecureRandom random = new SecureRandom().getInstance("SHA1PRNG");
+            byte[] salt = new byte[8];
+            random.nextBytes(salt);
+            return Base64.getEncoder().encodeToString(salt);
         }
     }
 }
