@@ -56,12 +56,8 @@ public class Client {
         /* TODO check for stack smashing */
         String credentialResp = create ? this.sendMessage("Create " + credentials) :
                 this.sendMessage("Login " + credentials);
-        boolean success = !credentialResp.equals("Exiting");
-        if(!success) {
-            stopConnection();
-        }
-        System.out.println(credentialResp);
-        return success;
+        System.out.println("Authenticated: " + !credentialResp.equals("Exiting"));
+        return !credentialResp.equals("Exiting");
     }
 
 

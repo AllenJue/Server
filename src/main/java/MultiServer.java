@@ -123,9 +123,11 @@ public class MultiServer {
                      switch (inputCreds[0]) {
                          case "Create":
                              valid = createAccount(inputCreds);
+                             System.out.println("Account attempt creation");
                              break;
                          case "Login":
                              valid = login(inputCreds);
+                             System.out.println("login attempted");
                              break;
                          default:
                              System.out.println("Invalid input");
