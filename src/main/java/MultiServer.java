@@ -94,7 +94,7 @@ public class MultiServer {
      * only has a single purpose, give the client confirmation that a message was received and exit.
      */
     private class ServerConnection extends Thread {
-        private final int DERIVED_KEY_LENGTH = 512; /* SHA512 creates a key of 512 bits long */
+        private final int DERIVED_KEY_LENGTH = 160; /* SHA1 creates a key of 160 bits long */
         private BufferedReader serverInput; /* Synchronous read for incoming data */
         private PrintWriter serverOutput;   /* Synchronous write for outgoing data */
         private Socket connFd;              /* Connection socket for communicating with client */
@@ -187,7 +187,7 @@ public class MultiServer {
          * This is then kept in a separate datastore.
          * @param inputCreds credentials of user
          * @return true if an account was successfully created
-         * @throws NoSuchAlgorithmException if PBKDF2WithHmacSHA512 is not a valid algorithm
+         * @throws NoSuchAlgorithmException if PBKDF2WithHmacSHA1 is not a valid algorithm
          * @throws InvalidKeySpecException if key spec generation failed
          * @throws IOException if data could not be written to datastore
          */
@@ -226,16 +226,16 @@ public class MultiServer {
          * @param password user specified password
          * @return an encrypted password
          * @throws InvalidKeySpecException if Key Spec could not be made
-         * @throws NoSuchAlgorithmException if PBKDF2WithHmacSHA512 could not be resolved
+         * @throws NoSuchAlgorithmException if PBKDF2WithHmacSHA1 could not be resolved
          */
         private String getEncryptedPassword(String salt, String password)
                 throws InvalidKeySpecException, NoSuchAlgorithmException {
-            /* Specify the algorithm for encryption. PBKDF2--WithHmac--SHA512
+            /* Specify the algorithm for encryption. PBKDF2--WithHmac--SHA1
                 PBKDF2 handles Password-based-key-derivative function - creates a cipher function
                 WithHmac - Keyed-Hash Message Authentication Code - creates a message authentication code
-                SHA512 - hash function
+                SHA1 - hash function
              */
-            String algorithm = "PBKDF2WithHmacSHA512";
+            String algorithm = "PBKDF2WithHmacSHA1";
             final int iterations = 20000;
             byte[] saltBytes = Base64.getDecoder().decode(salt);
             PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), saltBytes, iterations, DERIVED_KEY_LENGTH);
@@ -250,7 +250,7 @@ public class MultiServer {
          */
         private String getNewSalt() throws NoSuchAlgorithmException {
             /* Use SecureRandom to get crpytographically strong random numbers */
-            SecureRandom random = new SecureRandom().getInstance("SHA512PRNG");
+            SecureRandom random = new SecureRandom().getInstance("SHA1PRNG");
             byte[] salt = new byte[8];
             random.nextBytes(salt);
             return Base64.getEncoder().encodeToString(salt);
