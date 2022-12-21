@@ -163,8 +163,9 @@ public class MultiServer {
         }
 
         private void addDataToFile(UserInfo user) throws IOException {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("DataStore.txt"));
-            bufferedWriter.write(user.toString());
+            FileWriter writer = new FileWriter("DataStore.txt");
+            writer.write(writer.toString());
+            System.out.println("Written");
         }
 
         private String getEncryptedPassword(String salt, String password)
