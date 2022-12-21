@@ -33,6 +33,10 @@ public class MultiServer {
         }
     }
 
+    /**
+     * Upon starting the Server, load in user data from a DataStore to allow for user logins
+     * @throws IOException if DataStore.txt does not exist
+     */
     private void loadInfo() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader("DataStore.txt"));
         String input;
@@ -55,17 +59,30 @@ public class MultiServer {
         serverSocket.close();
     }
 
+    /**
+     * UserInfo objects hold the username, salt, and encrypted password for a user.
+     */
     private class UserInfo {
-        String username;
-        String salt;
-        String encryptedPassword;
+        private String salt;
+        private String username;
+        private String encryptedPassword;
 
+        /**
+         * Creates a UserInfo object
+         * @param username user's username
+         * @param salt associated with user's account
+         * @param password encrypted password for this account
+         */
         public UserInfo(String username, String salt, String password) {
             this.username = username;
             this.salt = salt;
             this.encryptedPassword = password;
         }
 
+        /**
+         * Creates a String representation for a UserInfo object.
+         * @return the fields of a UserInfo appended onto each other
+          */
         @Override
         public String toString() {
             return salt + " " + username + " " + encryptedPassword + "\n";
@@ -77,8 +94,7 @@ public class MultiServer {
      * only has a single purpose, give the client confirmation that a message was received and exit.
      */
     private class ServerConnection extends Thread {
-        private final int DERIVED_KEY_LENGTH = 512;
-
+        private final int DERIVED_KEY_LENGTH = 512; /* SHA512 creates a key of 512 bits long */
         private BufferedReader serverInput; /* Synchronous read for incoming data */
         private PrintWriter serverOutput;   /* Synchronous write for outgoing data */
         private Socket connFd;              /* Connection socket for communicating with client */
@@ -99,7 +115,6 @@ public class MultiServer {
          * Listens for input constantly, blocking while waiting for I/O to come in.
          */
         public void run() {
-
             String input;
             try {
                 boolean valid = false;
@@ -110,12 +125,12 @@ public class MultiServer {
                              valid = createAccount(inputCreds);
                              serverOutput.println("Account created");
                              break;
-                    //     case "Login":
-                    //         login(inputCreds);
-                    //         break;
-                    //     default:
-                    //         System.out.println("Invalid input");
-                    //         break;
+                         case "Login":
+                             login(inputCreds);
+                             break;
+                         default:
+                             System.out.println("Invalid input");
+                             break;
                      }
                 }
                 // do some authentication with DB
@@ -137,15 +152,34 @@ public class MultiServer {
             }
         }
 
+        /**
+         * Checks if instructions have something in them along with them
+         * @param numInstructions number of instructions passed in
+         * @return numInstructions > 1
+         */
         public boolean instructionNotEmpty(int numInstructions) {
             return numInstructions > 1;
         }
 
+        /**
+         * Logs in user.
+         * @param inputCreds
+         * @return
+         */
         public boolean login(String[] inputCreds) {
             boolean success = false;
             return success;
         }
 
+        /**
+         * Creates a user account by generating a salt and encrypted password for a user.
+         * This is then kept in a separate datastore.
+         * @param inputCreds credentials of user
+         * @return true if an account was successfully created
+         * @throws NoSuchAlgorithmException if PBKDF2WithHmacSHA1 is not a valid algorithm
+         * @throws InvalidKeySpecException if key spec generation failed
+         * @throws IOException if data could not be written to datastore
+         */
         public boolean createAccount(String[] inputCreds)
                 throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
             /* Fail if invalid input (missing username or password) or username taken */
@@ -162,13 +196,25 @@ public class MultiServer {
             return true;
         }
 
+        /**
+         * Write-through user data to datastore
+         * @param user Object that holds user data
+         * @throws IOException if DataStore.txt could not be opened
+         */
         private void addDataToFile(UserInfo user) throws IOException {
             FileWriter writer = new FileWriter("DataStore.txt");
-            writer.write(writer.toString());
+            writer.write(user.toString());
             writer.close();
-            System.out.println("Written");
         }
 
+        /**
+         * Gets the encrypted password of a password and salt combination
+         * @param salt specific salt for an account to prevent rainbow table attacks
+         * @param password user specified password
+         * @return an encrypted password
+         * @throws InvalidKeySpecException if Key Spec could not be made
+         * @throws NoSuchAlgorithmException if PBKDF2WithHmacSHA1 could not be resolved
+         */
         private String getEncryptedPassword(String salt, String password)
                 throws InvalidKeySpecException, NoSuchAlgorithmException {
             /* Specify the algorithm for encryption. PBKDF2--WithHmac--SHA512
@@ -179,7 +225,6 @@ public class MultiServer {
             String algorithm = "PBKDF2WithHmacSHA1";
             final int iterations = 20000;
             byte[] saltBytes = Base64.getDecoder().decode(salt);
-            System.out.println(saltBytes.toString());
             PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), saltBytes, iterations, DERIVED_KEY_LENGTH);
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(algorithm);
             byte[] encodedBytes = keyFactory.generateSecret(spec).getEncoded();
@@ -188,7 +233,7 @@ public class MultiServer {
 
         /**
          * Gets base64 encoded salt.
-         * @return
+         * @return a cryptographically-sound salt
          */
         private String getNewSalt() throws NoSuchAlgorithmException {
             /* Use SecureRandom to get crpytographically strong random numbers */
