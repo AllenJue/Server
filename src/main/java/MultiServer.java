@@ -132,7 +132,10 @@ public class MultiServer {
                              break;
                      }
                 }
-                serverOutput.println("Authentication success: " + valid);
+                if(!valid) {
+                    serverOutput.println("Exiting");
+                }
+                // serverOutput.println("Authentication success: " + valid);
 
                 while(valid && (input = serverInput.readLine()) != null) {
                     if(input.equals("quit")) {
