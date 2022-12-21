@@ -45,7 +45,7 @@ public class MultiServer {
             if(data.length != SIZE_OF_INFO) {
                 throw new InvalidObjectException("Login credentials invalid");
             }
-            userInformation.put(data[0], new UserInfo(data[0], data[1], data[2]));
+            userInformation.put(data[1], new UserInfo(data[0], data[1], data[2]));
         }
         System.out.println("Server loaded with: ");
         System.out.println(userInformation);
@@ -137,8 +137,7 @@ public class MultiServer {
                 if(!valid) {
                     serverOutput.println("Exiting");
                 }
-                // serverOutput.println("Authentication success: " + valid);
-
+                serverOutput.println("Authentication result: " + valid);
                 while(valid && (input = serverInput.readLine()) != null) {
                     if(input.equals("quit")) {
                         serverOutput.println("Exiting");
@@ -203,10 +202,8 @@ public class MultiServer {
             String password = inputCreds[2];
             String encryptedPassword = getEncryptedPassword(salt, password);
             /* Add to simulated 'database' and write-through */
-            System.out.println("Username: " + username);
             userInformation.put(username, new UserInfo(username, salt, encryptedPassword));
             addDataToFile(userInformation.get(username));
-            System.out.println(userInformation.keySet());
 
             return true;
         }
@@ -238,7 +235,7 @@ public class MultiServer {
                 WithHmac - Keyed-Hash Message Authentication Code - creates a message authentication code
                 SHA512 - hash function
              */
-            String algorithm = "PBKDF2WithHmacSHA1";
+            String algorithm = "PBKDF2WithHmacSHA512";
             final int iterations = 20000;
             byte[] saltBytes = Base64.getDecoder().decode(salt);
             PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), saltBytes, iterations, DERIVED_KEY_LENGTH);
