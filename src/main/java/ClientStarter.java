@@ -11,7 +11,7 @@ public class ClientStarter {
         Client client = new Client();
         client.startConnection(FREUD, TEST_PORT);
         String credentials = client.getCredInput();
-        boolean authenticated = client.authenticate(credentials, true);
+        boolean authenticated = client.authenticate(credentials, false);
         Scanner sc = new Scanner(System.in);
         while(true) {
             String resp = client.sendMessage(sc.nextLine());

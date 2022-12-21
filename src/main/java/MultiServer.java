@@ -3,6 +3,8 @@
  * Date: 12/17/2022
  */
 
+import com.sun.org.apache.xpath.internal.operations.Minus;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.io.*;
@@ -20,7 +22,7 @@ import java.util.Map;
  */
 public class MultiServer {
     public final int SIZE_OF_INFO = 3;
-    Map<String, UserInfo> info = new HashMap<>(); /* Simulates database */
+    Map<String, UserInfo> userInformation = new HashMap<>(); /* Simulates database */
     private ServerSocket serverSocket;           /* The listening socket for a server */
     public void start(int port) throws IOException {
         loadInfo();
@@ -45,10 +47,10 @@ public class MultiServer {
             if(data.length != SIZE_OF_INFO) {
                 throw new InvalidObjectException("Login credentials invalid");
             }
-            info.put(data[0], new UserInfo(data[0], data[1], data[2]));
+            userInformation.put(data[0], new UserInfo(data[0], data[1], data[2]));
         }
         System.out.println("Server loaded with: ");
-        System.out.println(info);
+        System.out.println(userInformation);
     }
 
     /**
@@ -123,18 +125,18 @@ public class MultiServer {
                      switch (inputCreds[0]) {
                          case "Create":
                              valid = createAccount(inputCreds);
-                             serverOutput.println("Account created");
                              break;
                          case "Login":
-                             login(inputCreds);
+                             valid = login(inputCreds);
                              break;
                          default:
                              System.out.println("Invalid input");
                              break;
                      }
                 }
-                // do some authentication with DB
-                // valid = authenticate(username, password)
+                if(!valid) {
+                    serverOutput.println("Authentication failed");
+                }
 
                 while(valid && (input = serverInput.readLine()) != null) {
                     if(input.equals("quit")) {
@@ -162,13 +164,22 @@ public class MultiServer {
         }
 
         /**
-         * Logs in user.
-         * @param inputCreds
-         * @return
+         * Logs user into their account.
+         * @param inputCreds login credentials
+         * @return true if user successfully logged in
+         * @throws InvalidKeySpecException key spec could not be generated
+         * @throws NoSuchAlgorithmException No hash algorithm found
          */
-        public boolean login(String[] inputCreds) {
-            boolean success = false;
-            return success;
+        public boolean login(String[] inputCreds) throws InvalidKeySpecException, NoSuchAlgorithmException {
+            /* Invalid if no username/password or the username does not exist */
+            if(inputCreds.length != SIZE_OF_INFO || !userInformation.containsKey(inputCreds[1])) {
+                return false;
+            }
+            String username = inputCreds[1];
+            String password = inputCreds[2];
+            UserInfo loggedInfo = userInformation.get(username);
+            String curEncryptedPassword = getEncryptedPassword(loggedInfo.salt, password);
+            return curEncryptedPassword.equals(loggedInfo.encryptedPassword);
         }
 
         /**
@@ -183,7 +194,7 @@ public class MultiServer {
         public boolean createAccount(String[] inputCreds)
                 throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
             /* Fail if invalid input (missing username or password) or username taken */
-            if(inputCreds.length != 3 && !info.containsKey(inputCreds[1])) {
+            if(inputCreds.length != SIZE_OF_INFO || userInformation.containsKey(inputCreds[1])) {
                 return false;
             }
             String salt = getNewSalt();
@@ -191,8 +202,8 @@ public class MultiServer {
             String password = inputCreds[2];
             String encryptedPassword = getEncryptedPassword(salt, password);
             /* Add to simulated 'database' and write-through */
-            info.put(username, new UserInfo(username, salt, encryptedPassword));
-            addDataToFile(info.get(username));
+            userInformation.put(username, new UserInfo(username, salt, encryptedPassword));
+            addDataToFile(userInformation.get(username));
             return true;
         }
 
