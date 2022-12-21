@@ -132,9 +132,7 @@ public class MultiServer {
                              break;
                      }
                 }
-                if(!valid) {
-                    serverOutput.println("Authentication failed");
-                }
+                serverOutput.println("Authentication success: " + valid);
 
                 while(valid && (input = serverInput.readLine()) != null) {
                     if(input.equals("quit")) {
@@ -202,6 +200,8 @@ public class MultiServer {
             /* Add to simulated 'database' and write-through */
             userInformation.put(username, new UserInfo(username, salt, encryptedPassword));
             addDataToFile(userInformation.get(username));
+            System.out.println(userInformation.keySet());
+
             return true;
         }
 
