@@ -58,17 +58,17 @@ public class MultiServer {
     private class UserInfo {
         String username;
         String salt;
-        String hashed;
+        String encryptedPassword;
 
         public UserInfo(String username, String salt, String password) {
             this.username = username;
             this.salt = salt;
-            this.hashed = password;
+            this.encryptedPassword = password;
         }
 
         @Override
         public String toString() {
-            return username + " " + salt + " " + hashed;
+            return salt + " " + username + " " + encryptedPassword + "\n";
         }
     }
     /**
@@ -148,18 +148,23 @@ public class MultiServer {
 
         public boolean createAccount(String[] inputCreds)
                 throws NoSuchAlgorithmException, InvalidKeySpecException {
-            boolean success = false;
-            if(inputCreds.length != 3) {
-                return success;
+            /* Fail if invalid input (missing username or password) or username taken */
+            if(inputCreds.length != 3 && !info.containsKey(inputCreds[1])) {
+                return false;
             }
             String salt = getNewSalt();
             String username = inputCreds[1];
             String password = inputCreds[2];
             String encryptedPassword = getEncryptedPassword(salt, password);
-            System.out.println(encryptedPassword);
-            return success;
+            /* Add to simulated 'database' and write-through */
+            info.put(username, new UserInfo(username, salt, encryptedPassword));
+            return true;
         }
 
+        private void addDataToFile(UserInfo user) throws IOException {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("DataStore.txt"));
+            bufferedWriter.write(user.toString());
+        }
 
         private String getEncryptedPassword(String salt, String password)
                 throws InvalidKeySpecException, NoSuchAlgorithmException {
