@@ -120,7 +120,6 @@ public class MultiServer {
                 }
                 // do some authentication with DB
                 // valid = authenticate(username, password)
-                // TODO replace
 
                 while(valid && (input = serverInput.readLine()) != null) {
                     if(input.equals("quit")) {
@@ -148,7 +147,7 @@ public class MultiServer {
         }
 
         public boolean createAccount(String[] inputCreds)
-                throws NoSuchAlgorithmException, InvalidKeySpecException {
+                throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
             /* Fail if invalid input (missing username or password) or username taken */
             if(inputCreds.length != 3 && !info.containsKey(inputCreds[1])) {
                 return false;
@@ -159,6 +158,7 @@ public class MultiServer {
             String encryptedPassword = getEncryptedPassword(salt, password);
             /* Add to simulated 'database' and write-through */
             info.put(username, new UserInfo(username, salt, encryptedPassword));
+            addDataToFile(info.get(username));
             return true;
         }
 
