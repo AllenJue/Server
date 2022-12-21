@@ -3,8 +3,6 @@
  * Date: 12/17/2022
  */
 
-import com.sun.org.apache.xpath.internal.operations.Minus;
-
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.io.*;
@@ -213,7 +211,8 @@ public class MultiServer {
          * @throws IOException if DataStore.txt could not be opened
          */
         private void addDataToFile(UserInfo user) throws IOException {
-            FileWriter writer = new FileWriter("DataStore.txt");
+            /* Open file to write to and true to append */
+            FileWriter writer = new FileWriter("DataStore.txt", true);
             writer.write(user.toString());
             writer.close();
         }
