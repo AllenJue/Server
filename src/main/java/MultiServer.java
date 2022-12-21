@@ -201,6 +201,7 @@ public class MultiServer {
             String password = inputCreds[2];
             String encryptedPassword = getEncryptedPassword(salt, password);
             /* Add to simulated 'database' and write-through */
+            System.out.println("Username: " + username);
             userInformation.put(username, new UserInfo(username, salt, encryptedPassword));
             addDataToFile(userInformation.get(username));
             System.out.println(userInformation.keySet());
