@@ -107,7 +107,8 @@ public class MultiServer {
                 if(instructionNotEmpty(inputCreds.length)) {
                      switch (inputCreds[0]) {
                          case "Create":
-                             createAccount(inputCreds);
+                             valid = createAccount(inputCreds);
+                             serverOutput.println("Account created");
                              break;
                     //     case "Login":
                     //         login(inputCreds);
@@ -120,7 +121,7 @@ public class MultiServer {
                 // do some authentication with DB
                 // valid = authenticate(username, password)
                 // TODO replace
-                valid = true;
+
                 while(valid && (input = serverInput.readLine()) != null) {
                     if(input.equals("quit")) {
                         serverOutput.println("Exiting");
