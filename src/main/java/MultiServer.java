@@ -165,6 +165,7 @@ public class MultiServer {
         private void addDataToFile(UserInfo user) throws IOException {
             FileWriter writer = new FileWriter("DataStore.txt");
             writer.write(writer.toString());
+            writer.close();
             System.out.println("Written");
         }
 
