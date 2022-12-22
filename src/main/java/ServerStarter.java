@@ -15,7 +15,7 @@ public class ServerStarter {
     public static void main(String[] args) {
         MultiServer server = new MultiServer();
         try {
-            server.start(DEFAULT_PORT, "/DataStore/DataStore.txt");
+            server.start(DEFAULT_PORT, "DataStore/Test.txt");
         } catch (Exception e) {
             System.out.println("Failed to start server");
             System.out.println(e);

@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0c7c2922-9838-47f1-a77b-ce72dfaddf0a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MultiServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MultiServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ServerStarter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ServerStarter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/SingleClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SingleClientTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/MultipleClientTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MultipleClientTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,37 +70,8 @@
       <recent name="$PROJECT_DIR$/src/main" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Tests in 'Server.test'">
-    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Client" />
-      <module name="Server.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ClientStarter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ClientStarter" />
-      <module name="Server.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Server" />
-      <module name="Server.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ServerStarter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ServerStarter" />
-      <module name="Server.main" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/main/java" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Tests in 'Server.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.MultipleClientTests">
+    <configuration name="MultipleClientTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -110,6 +83,100 @@
         <option name="taskNames">
           <list>
             <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;MultipleClientTests&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="MultipleClientTests.test_create_multiple_clients_valid" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;MultipleClientTests.test_create_multiple_clients_valid&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="MultipleClientTests.test_login_multiple_clients_invalid" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;MultipleClientTests.test_login_multiple_clients_invalid&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="SingleClientTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;SingleClientTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="SingleClientTest.attempt_to_login_nonexistent_account" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;SingleClientTest.attempt_to_login_nonexistent_account&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -120,19 +187,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.Client" />
-      <item itemvalue="Application.ClientStarter" />
-      <item itemvalue="Application.Server" />
-      <item itemvalue="Application.ServerStarter" />
-      <item itemvalue="Gradle.Tests in 'Server.test'" />
+      <item itemvalue="Gradle.MultipleClientTests" />
+      <item itemvalue="Gradle.MultipleClientTests.test_create_multiple_clients_valid" />
+      <item itemvalue="Gradle.MultipleClientTests.test_login_multiple_clients_invalid" />
+      <item itemvalue="Gradle.SingleClientTest" />
+      <item itemvalue="Gradle.SingleClientTest.attempt_to_login_nonexistent_account" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Tests in 'Server.test'" />
-        <item itemvalue="Application.ServerStarter" />
-        <item itemvalue="Application.ClientStarter" />
-        <item itemvalue="Application.Server" />
-        <item itemvalue="Application.Client" />
+        <item itemvalue="Gradle.MultipleClientTests" />
+        <item itemvalue="Gradle.MultipleClientTests.test_create_multiple_clients_valid" />
+        <item itemvalue="Gradle.MultipleClientTests.test_login_multiple_clients_invalid" />
+        <item itemvalue="Gradle.SingleClientTest" />
+        <item itemvalue="Gradle.SingleClientTest.attempt_to_login_nonexistent_account" />
       </list>
     </recent_temporary>
   </component>
@@ -147,7 +214,7 @@
       <workItem from="1671506027468" duration="42000" />
       <workItem from="1671563346306" duration="8605000" />
       <workItem from="1671607852152" duration="725000" />
-      <workItem from="1671745031259" duration="1859000" />
+      <workItem from="1671745031259" duration="4100000" />
     </task>
     <servers />
   </component>

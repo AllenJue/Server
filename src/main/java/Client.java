@@ -57,7 +57,7 @@ public class Client {
     }
 
     /**
-     * Authenticates user based on their credentials.
+     * Authenticates user based on their credentials. Closes connection if invalid
      * @param credentials user's username concatenated by their password
      * @param create flag to designate if user wishes to create an account or login
      * @return true if user was successfully able to access the database

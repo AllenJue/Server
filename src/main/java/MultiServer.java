@@ -19,10 +19,11 @@ import java.util.Map;
  * A server that can handle multiple client connections
  */
 public class MultiServer {
-    public final int SIZE_OF_INFO = 3;
+    public final int SIZE_OF_INFO = 3;           /* Length of initial request */
     Map<String, UserInfo> userInformation = new HashMap<>(); /* Simulates database */
     private ServerSocket serverSocket;           /* The listening socket for a server */
 
+    private String dataStorePath;                /* Location of dataStore */
     /**
      * Initializes a server by loading in data from a specified data store and listens to connection requests.
      * @param port to identify server process by
@@ -30,7 +31,8 @@ public class MultiServer {
      * @throws IOException if listening connection could not be made
      */
     public void start(int port, String dataStoreName) throws IOException {
-        loadInfo(dataStoreName);
+        dataStorePath = dataStoreName;
+        loadInfo(dataStorePath);
         /* listening socket */
         serverSocket = new ServerSocket(port);
         /* continue to listen for new connections to accept */
@@ -43,7 +45,7 @@ public class MultiServer {
     /**
      * Upon starting the Server, load in user data from a DataStore to allow for user logins
      * @param dataStoreName name of datastore to be read from
-     * @throws IOException if DataStore.txt does not exist
+     * @throws IOException if dataStorePath does not exist
      */
     private void loadInfo(String dataStoreName) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(dataStoreName));
@@ -241,11 +243,11 @@ public class MultiServer {
         /**
          * Write-through user data to datastore
          * @param user Object that holds user data
-         * @throws IOException if DataStore.txt could not be opened
+         * @throws IOException if dataStorePath could not be opened
          */
         private void addDataToFile(UserInfo user) throws IOException {
             /* Open file to write to and true to append */
-            FileWriter writer = new FileWriter("DataStore/DataStore.txt", true);
+            FileWriter writer = new FileWriter(dataStorePath, true);
             writer.write(user.toString());
             writer.close();
         }
