@@ -88,6 +88,7 @@ public class MultiServer {
             return salt + " " + username + " " + encryptedPassword + "\n";
         }
     }
+
     /**
      * An abstraction of a server connection created by a server thread. A connection is given a thread,
      * and returns the connection socket created when the listening socket accepts. The server thread
@@ -117,23 +118,7 @@ public class MultiServer {
         public void run() {
             String input;
             try {
-                boolean valid = false;
-                String[] inputCreds = serverInput.readLine().split("\\s+");
-                if(instructionNotEmpty(inputCreds.length)) {
-                     switch (inputCreds[0]) {
-                         case "Create":
-                             valid = createAccount(inputCreds);
-                             System.out.println("Account attempt creation");
-                             break;
-                         case "Login":
-                             valid = login(inputCreds);
-                             System.out.println("login attempted");
-                             break;
-                         default:
-                             System.out.println("Invalid input");
-                             break;
-                     }
-                }
+                boolean valid = handleLoginOrCreation();
                 if(!valid) {
                     serverOutput.println("Exiting");
                 }
@@ -146,12 +131,49 @@ public class MultiServer {
                     serverOutput.println("Message received: " + input);
                 }
                 /* Done listening, release resources on server side */
-                serverInput.close();
-                serverOutput.close();
-                connFd.close();
+                endConnection();
             } catch (Exception e) {
                 System.out.println("Server error. Oopsies");
             }
+        }
+
+        /**
+         * Handles a user's initial input to login or create an account
+         * @return true if request was successful
+         */
+        private boolean handleLoginOrCreation() {
+            boolean valid = false;
+            try {
+                String[] inputCreds = serverInput.readLine().split("\\s+");
+                if (instructionNotEmpty(inputCreds.length)) {
+                    switch (inputCreds[0]) {
+                        case "Create":
+                            valid = createAccount(inputCreds);
+                            System.out.println("Account attempt creation");
+                            break;
+                        case "Login":
+                            valid = login(inputCreds);
+                            System.out.println("login attempted");
+                            break;
+                        default:
+                            System.out.println("Invalid input");
+                            break;
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            return valid;
+        }
+
+        /**
+         * Ends a connection from the server side once completed
+         * @throws IOException if input or output device could not successfully close
+         */
+        private void endConnection() throws IOException {
+            serverInput.close();
+            serverOutput.close();
+            connFd.close();
         }
 
         /**
