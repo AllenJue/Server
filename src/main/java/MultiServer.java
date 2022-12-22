@@ -22,8 +22,15 @@ public class MultiServer {
     public final int SIZE_OF_INFO = 3;
     Map<String, UserInfo> userInformation = new HashMap<>(); /* Simulates database */
     private ServerSocket serverSocket;           /* The listening socket for a server */
-    public void start(int port) throws IOException {
-        loadInfo();
+
+    /**
+     * Initializes a server by loading in data from a specified data store and listens to connection requests.
+     * @param port to identify server process by
+     * @param dataStoreName name of datastore to load user data from
+     * @throws IOException if listening connection could not be made
+     */
+    public void start(int port, String dataStoreName) throws IOException {
+        loadInfo(dataStoreName);
         /* listening socket */
         serverSocket = new ServerSocket(port);
         /* continue to listen for new connections to accept */
@@ -35,10 +42,11 @@ public class MultiServer {
 
     /**
      * Upon starting the Server, load in user data from a DataStore to allow for user logins
+     * @param dataStoreName name of datastore to be read from
      * @throws IOException if DataStore.txt does not exist
      */
-    private void loadInfo() throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader("DataStore.txt"));
+    private void loadInfo(String dataStoreName) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(dataStoreName));
         String input;
         while((input = bufferedReader.readLine()) != null) {
             String[] data = input.split("\\s+");
@@ -237,7 +245,7 @@ public class MultiServer {
          */
         private void addDataToFile(UserInfo user) throws IOException {
             /* Open file to write to and true to append */
-            FileWriter writer = new FileWriter("DataStore.txt", true);
+            FileWriter writer = new FileWriter("DataStore/DataStore.txt", true);
             writer.write(user.toString());
             writer.close();
         }
