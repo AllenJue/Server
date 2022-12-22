@@ -43,6 +43,10 @@ public class Client {
     }
 
 
+    /**
+     * Prompts user for username and password
+     * @return username + " " + password
+     */
     public String getCredInput() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter username: ");
@@ -52,11 +56,17 @@ public class Client {
         return username + " " + password;
     }
 
+    /**
+     * Authenticates user based on their credentials.
+     * @param credentials user's username concatenated by their password
+     * @param create flag to designate if user wishes to create an account or login
+     * @return true if user was successfully able to access the database
+     * @throws IOException if unable to read input
+     */
     public boolean authenticate(String credentials, boolean create) throws IOException {
         /* TODO check for stack smashing */
         String credentialResp = create ? this.sendMessage("Create " + credentials) :
                 this.sendMessage("Login " + credentials);
-        System.out.println("Authenticated: " + !credentialResp.equals("Exiting"));
         return !credentialResp.equals("Exiting");
     }
 
