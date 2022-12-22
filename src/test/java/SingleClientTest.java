@@ -6,6 +6,8 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 /**
  * Tests for accuracy within a single client-server relationship.
  * Note that test cases will pass if the network is simply not working.
@@ -14,44 +16,44 @@ public class SingleClientTest {
     private static final String FREUD = "128.83.120.232";   /* Default IP Address, lab machine */
     private static final int TEST_PORT = 3000;              /* Arbitrary port used */
 
-    /**
-     * Tests that a single client can send and close messages
-     */
     @Test
-    public void test_msg_correct_single_client() {
+    public void attempt_to_login_nonexistent_account() throws IOException {
         Client client = new Client();
-        try {
-            client.startConnection(FREUD, TEST_PORT);
-            String resp1 = client.sendMessage("Hello");
-            String resp2 = client.sendMessage("World");
-            String terminate = client.sendMessage("quit");
-            Assertions.assertEquals("Message received: Hello", resp1);
-            Assertions.assertEquals("Message received: World", resp2);
-            Assertions.assertEquals("Exiting", terminate);
-        } catch (Exception e) {
-            System.out.println("Network failed");
-        }
+        String credentials = "Doesn't exist";
+        boolean authenticated = client.authenticate(credentials, false);
+        Assertions.assertFalse(authenticated);
     }
 
-    /**
-     * Tests that a single client can sequentially send messages, close, open a new connection
-     */
     @Test
-    public void test_msg_disconnect_and_reconnect_client() {
+    public void test_create_account() throws IOException {
         Client client = new Client();
-        try {
-            client.startConnection(FREUD, TEST_PORT);
-            String resp1 = client.sendMessage("Connecting");
-            String terminate = client.sendMessage("quit");
-            Assertions.assertEquals("Message received: Connecting", resp1);
-            Assertions.assertEquals("Exiting", terminate);
-            client.startConnection(FREUD, TEST_PORT);
-            String resp2 = client.sendMessage("Reconnecting");
-            String terminate2 = client.sendMessage("quit");
-            Assertions.assertEquals("Message received: Reconnecting", resp2);
-            Assertions.assertEquals("Exiting", terminate2);
-        } catch (Exception e) {
-            System.out.println("Network failed");
-        }
+        String credentials = "allen jue"; /* username: allen, password: jue */
+        boolean authenticated = client.authenticate(credentials, true);
+        Assertions.assertTrue(authenticated);
+        String resp = client.sendMessage("Hello, world");
+        Assertions.assertEquals("Message received: Hello, world", resp);
+        String resp1 = client.sendMessage("quit");
+        Assertions.assertEquals("Exiting", resp1);
     }
+
+    @Test
+    public void test_login_to_created_account() throws IOException {
+        Client client = new Client();
+        String existingCredentials = "allen jue";
+        boolean authenticated = client.authenticate(existingCredentials, false);
+        Assertions.assertTrue(authenticated);
+        String resp = client.sendMessage("Hello, world");
+        Assertions.assertEquals("Message received: Hello, world", resp);
+        String resp1 = client.sendMessage("quit");
+        Assertions.assertEquals("Exiting", resp);
+    }
+
+    @Test
+    public void test_attempt_creating_existing_account() throws IOException {
+        Client client = new Client();
+        String existingCredentials = "allen jue";
+        boolean authenticated = client.authenticate(existingCredentials, true);
+        Assertions.assertFalse(authenticated);
+    }
+
 }
