@@ -4,13 +4,17 @@
  */
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import java.io.IOException;
 
 /**
  * Tests the accuracy of the client-server relationship between multiple clients
+ * @throws IOException if IO devices failed
  */
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class MultipleClientTests {
     private static final String FREUD = "128.83.120.232";
     private static final int TEST_PORT = 3000;
@@ -18,8 +22,12 @@ public class MultipleClientTests {
     private static final String credential1 = "allen jue";
     private static final String credential2 = "jue allen";
 
+    /**
+     * Tests multiple clients trying to login to invalid accounts
+     * @throws IOException
+     */
     @Test
-    public void test_login_multiple_clients_invalid() throws IOException {
+    public void test_1_login_multiple_clients_invalid() throws IOException {
         Client client1 = new Client();
         Client client2 = new Client();
         client1.startConnection(FREUD, TEST_PORT);
@@ -30,8 +38,12 @@ public class MultipleClientTests {
         Assertions.assertFalse(client2Success);
     }
 
+    /**
+     * Test multiple clients simultaneously logging in
+     * @throws IOException if IO devices failed
+     */
     @Test
-    public void test_create_multiple_clients_valid() throws IOException {
+    public void test_2_create_multiple_clients_valid() throws IOException {
         Client client1 = new Client();
         Client client2 = new Client();
         client1.startConnection(FREUD, TEST_PORT);
@@ -51,9 +63,10 @@ public class MultipleClientTests {
 
     /**
      * Test if multiple clients at once can work commands for each are sequentially adjacent
+     * @throws IOException if IO devices failed
      */
     @Test
-    public void test_login_multiple_valid_clients() throws IOException {
+    public void test_3_login_multiple_valid_clients() throws IOException {
         Client client1 = new Client();
         Client client2 = new Client();
         client1.startConnection(FREUD, TEST_PORT);
@@ -73,9 +86,10 @@ public class MultipleClientTests {
 
     /**
      * Tests if multiple open clients can work with a server if their commands are interleaved
+     * @throws IOException if IO devices failed
      */
     @Test
-    public void test_interleave_multiple_clients() throws IOException {
+    public void test_4_interleave_multiple_clients() throws IOException {
         Client client1 = new Client();
         Client client2 = new Client();
         client1.startConnection(FREUD, TEST_PORT);

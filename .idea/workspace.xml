@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0c7c2922-9838-47f1-a77b-ce72dfaddf0a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MultiServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MultiServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ServerStarter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ServerStarter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/MultipleClientTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MultipleClientTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +17,16 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -60,6 +67,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.packagesearch.PackageSearchGeneralConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -117,6 +125,29 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="MultipleClientTests.test_interleave_multiple_clients" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;MultipleClientTests.test_interleave_multiple_clients&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="MultipleClientTests.test_login_multiple_clients_invalid" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -140,7 +171,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="SingleClientTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="MultipleClientTests.test_login_multiple_valid_clients" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -153,30 +184,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;SingleClientTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="SingleClientTest.attempt_to_login_nonexistent_account" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;SingleClientTest.attempt_to_login_nonexistent_account&quot;" />
+            <option value="&quot;MultipleClientTests.test_login_multiple_valid_clients&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -187,19 +195,18 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Gradle.MultipleClientTests.test_interleave_multiple_clients" />
       <item itemvalue="Gradle.MultipleClientTests" />
       <item itemvalue="Gradle.MultipleClientTests.test_create_multiple_clients_valid" />
       <item itemvalue="Gradle.MultipleClientTests.test_login_multiple_clients_invalid" />
-      <item itemvalue="Gradle.SingleClientTest" />
-      <item itemvalue="Gradle.SingleClientTest.attempt_to_login_nonexistent_account" />
+      <item itemvalue="Gradle.MultipleClientTests.test_login_multiple_valid_clients" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.MultipleClientTests" />
+        <item itemvalue="Gradle.MultipleClientTests.test_login_multiple_valid_clients" />
         <item itemvalue="Gradle.MultipleClientTests.test_create_multiple_clients_valid" />
         <item itemvalue="Gradle.MultipleClientTests.test_login_multiple_clients_invalid" />
-        <item itemvalue="Gradle.SingleClientTest" />
-        <item itemvalue="Gradle.SingleClientTest.attempt_to_login_nonexistent_account" />
       </list>
     </recent_temporary>
   </component>
@@ -214,7 +221,7 @@
       <workItem from="1671506027468" duration="42000" />
       <workItem from="1671563346306" duration="8605000" />
       <workItem from="1671607852152" duration="725000" />
-      <workItem from="1671745031259" duration="4100000" />
+      <workItem from="1671745031259" duration="4668000" />
     </task>
     <servers />
   </component>
