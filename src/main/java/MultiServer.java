@@ -281,7 +281,7 @@ public class MultiServer {
          * @return a cryptographically-sound salt
          */
         private String getNewSalt() throws NoSuchAlgorithmException {
-            /* Use SecureRandom to get crpytographically strong random numbers */
+            /* Use SecureRandom to get cryptographically strong random numbers */
             SecureRandom random = new SecureRandom().getInstance("SHA1PRNG");
             byte[] salt = new byte[8];
             random.nextBytes(salt);
