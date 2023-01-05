@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c7c2922-9838-47f1-a77b-ce72dfaddf0a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DatabaseMultiServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DatabaseServerStarter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ClientStarter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClientStarter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MultiServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MultiServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ServerStarter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ServerStarter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +31,39 @@
         <task path="$PROJECT_DIR$">
           <activation />
         </task>
-        <projects_view />
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Server" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Server" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Server" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Server" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Server" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="compileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
   </component>
@@ -70,6 +108,12 @@
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.packagesearch.PackageSearchGeneralConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;derby&quot;,
+      &quot;mysql&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
@@ -79,7 +123,21 @@
       <recent name="$PROJECT_DIR$/src/main" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.MultipleClientTests">
+  <component name="RunManager" selected="Application.ClientStarter">
+    <configuration name="ClientStarter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ClientStarter" />
+      <module name="Server.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DatabaseServerStarter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DatabaseServerStarter" />
+      <module name="Server.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MultipleClientTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -94,29 +152,6 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;MultipleClientTests&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="MultipleClientTests.test_create_multiple_clients_valid" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;MultipleClientTests.test_create_multiple_clients_valid&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -149,65 +184,46 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="MultipleClientTests.test_login_multiple_clients_invalid" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Server [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
+        <option name="scriptParameters" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;MultipleClientTests.test_login_multiple_clients_invalid&quot;" />
+            <option value="build" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="MultipleClientTests.test_login_multiple_valid_clients" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;MultipleClientTests.test_login_multiple_valid_clients&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
+    <configuration name="derby.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$USER_HOME$/Downloads/db-derby-10.16.1.1-bin/lib/derby.jar!/" />
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.ClientStarter" />
+      <item itemvalue="Application.DatabaseServerStarter" />
       <item itemvalue="Gradle.MultipleClientTests.test_interleave_multiple_clients" />
+      <item itemvalue="Gradle.Server [build]" />
       <item itemvalue="Gradle.MultipleClientTests" />
-      <item itemvalue="Gradle.MultipleClientTests.test_create_multiple_clients_valid" />
-      <item itemvalue="Gradle.MultipleClientTests.test_login_multiple_clients_invalid" />
-      <item itemvalue="Gradle.MultipleClientTests.test_login_multiple_valid_clients" />
+      <item itemvalue="JAR Application.derby.jar" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.DatabaseServerStarter" />
+        <item itemvalue="Application.ClientStarter" />
+        <item itemvalue="Gradle.Server [build]" />
+        <item itemvalue="JAR Application.derby.jar" />
         <item itemvalue="Gradle.MultipleClientTests" />
-        <item itemvalue="Gradle.MultipleClientTests.test_login_multiple_valid_clients" />
-        <item itemvalue="Gradle.MultipleClientTests.test_create_multiple_clients_valid" />
-        <item itemvalue="Gradle.MultipleClientTests.test_login_multiple_clients_invalid" />
       </list>
     </recent_temporary>
   </component>
@@ -223,7 +239,11 @@
       <workItem from="1671563346306" duration="8605000" />
       <workItem from="1671607852152" duration="725000" />
       <workItem from="1671745031259" duration="4696000" />
-      <workItem from="1671862311451" duration="614000" />
+      <workItem from="1671862311451" duration="930000" />
+      <workItem from="1672264208939" duration="3115000" />
+      <workItem from="1672609261982" duration="3456000" />
+      <workItem from="1672773033941" duration="3815000" />
+      <workItem from="1672894957964" duration="249000" />
     </task>
     <servers />
   </component>

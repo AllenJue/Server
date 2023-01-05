@@ -3,6 +3,7 @@
  * Date: 12/17/2022
  */
 
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.io.*;
@@ -21,9 +22,10 @@ import java.util.Map;
 public class MultiServer {
     public final int SIZE_OF_INFO = 3;           /* Length of initial request */
     Map<String, UserInfo> userInformation = new HashMap<>(); /* Simulates database */
-    private ServerSocket serverSocket;           /* The listening socket for a server */
+    protected ServerSocket serverSocket;           /* The listening socket for a server */
 
     private String dataStorePath;                /* Location of dataStore */
+
     /**
      * Initializes a server by loading in data from a specified data store and listens to connection requests.
      * @param port to identify server process by
@@ -104,7 +106,7 @@ public class MultiServer {
      * and returns the connection socket created when the listening socket accepts. The server thread
      * only has a single purpose, give the client confirmation that a message was received and exit.
      */
-    private class ServerConnection extends Thread {
+    protected class ServerConnection extends Thread {
         private final int DERIVED_KEY_LENGTH = 160; /* SHA1 creates a key of 160 bits long */
         private BufferedReader serverInput; /* Synchronous read for incoming data */
         private PrintWriter serverOutput;   /* Synchronous write for outgoing data */
@@ -260,7 +262,7 @@ public class MultiServer {
          * @throws InvalidKeySpecException if Key Spec could not be made
          * @throws NoSuchAlgorithmException if PBKDF2WithHmacSHA1 could not be resolved
          */
-        private String getEncryptedPassword(String salt, String password)
+        protected String getEncryptedPassword(String salt, String password)
                 throws InvalidKeySpecException, NoSuchAlgorithmException {
             /* Specify the algorithm for encryption. PBKDF2--WithHmac--SHA1
                 PBKDF2 handles Password-based-key-derivative function - creates a cipher function
@@ -280,7 +282,7 @@ public class MultiServer {
          * Gets base64 encoded salt.
          * @return a cryptographically-sound salt
          */
-        private String getNewSalt() throws NoSuchAlgorithmException {
+        protected String getNewSalt() throws NoSuchAlgorithmException {
             /* Use SecureRandom to get cryptographically strong random numbers */
             SecureRandom random = new SecureRandom().getInstance("SHA1PRNG");
             byte[] salt = new byte[8];
