@@ -1,4 +1,4 @@
-# Server
+# Server and Client Application
 
 ## Introduction
 This is my first networks related project, and I just wished to get a better 
@@ -23,6 +23,9 @@ To close a connection, enter 'quit'.
 A MySQL supporting version is also available. It was implemented with AWS RDS, and can be easily connected to by 
 the endpoint, username, and password for a RDS created with AWS.
 
+Currently, users can only communicate with the server. If I were to extend this functionality to
+between users, I'll need to consider a few things. I'll need to take care of how the server maintains incoming
+requests and sends out messages it receives to the correct recipients. 
 
 ## Technologies
 * Java SDK 1.8
@@ -48,6 +51,8 @@ I hope to continue exploring how networks are used. Possible network additions a
 * more complex behavior between clients and servers
 * giving priority to certain clients
 * connecting this type of behavior to a more interactive GUI
+* create new factors for users (followers, friends, message log)
+* add tests for inter-user communication
 
 Regarding Security:
 I understand that SHA256 is more secure, and it is not the best practice to store the passwords
